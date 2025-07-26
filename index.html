@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cartão de Visita - Maria Isabel Prado</title>
   <style>
-    /* ===== Paleta de cores suave ===== */
     :root {
       --azul-claro: #A2D2FF;
       --azul-escuro: #22577A;
@@ -13,26 +12,24 @@
       --azul-hover: #2667b1;
       --fundo-gradiente: radial-gradient(circle at top left, #f0f8ff, #d6ecf5);
     }
-
-    /* ===== Reset e base ===== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1px;
+  }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--fundo-gradiente);
-      text-align: center;
       color: #2c3e50;
+      text-align: center;
+      min-height: 100vh;
     }
 
-    /* ===== Cabeçalho com imagem e confetes ===== */
     header {
       background-color: var(--azul-claro);
       border-radius: 0 0 50% 50%;
-      padding: 50px 20px;
+      padding: 40px 20px;
       position: relative;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
@@ -43,27 +40,28 @@
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 24px;
+      font-size: 22px;
     }
 
-    header img {
-      width: 160px;
-      height: 160px;
+    #fotoPerfil {
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid #fff;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border: 5px solid white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
-    /* ===== Conteúdo principal ===== */
     main {
       padding: 30px 20px;
     }
 
     h1 {
-      margin: 20px 0 10px;
       font-size: 26px;
       color: var(--azul-escuro);
+      margin-bottom: 15px;
     }
 
     .info h4 {
@@ -71,52 +69,143 @@
       font-size: 16px;
     }
 
-    /* ===== Botões estilizados ===== */
     button {
-      background-color: var(--azul-botao);
+      background: var(--azul-botao);
       color: white;
       border: none;
-      padding: 12px 28px;
+      padding: 12px 24px;
       font-size: 16px;
-      border-radius: 10px;
+      border-radius: 8px;
+      margin: 12px 8px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
-      margin: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      background-color: var(--azul-hover);
+      background: var(--azul-hover);
       transform: scale(1.05);
     }
 
-    /* ===== Responsivo para telas menores ===== */
-    @media (max-width: 600px) {
-      header img {
-        width: 110px;
-        height: 110px;
-      }
-
-      h1 {
-        font-size: 22px;
-      }
-
-      .info h4 {
-        font-size: 14px;
-      }
-
-      button {
-        width: 80%;
-        font-size: 14px;
-      }
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8);
     }
+
+    #imgModalContent {
+      display: block;
+      margin: 5% auto;
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #fff;
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    #closeModal:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Decorações */
+    .decoracao {
+      position: absolute;
+      font-size: 22px;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .decoracao-top-left    { top: 20px; left: 10px; transform: rotate(-15deg); }
+    .decoracao-top-right   { top: 20px; right: 10px; transform: rotate(10deg); }
+    .decoracao-bottom-left { bottom: 20px; left: 10px; transform: rotate(15deg); }
+    .decoracao-bottom-right{ bottom: 20px; right: 10px; transform: rotate(-10deg); }
+    .decoracao-center-left { top: 50%; left: 5px; transform: translateY(-50%) rotate(-5deg); }
+    .decoracao-center-right{ top: 50%; right: 5px; transform: translateY(-50%) rotate(5deg); }
+  
+  footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+footer .creditos {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+  #fotoPerfil {
+    width: 160px;
+    height: 160px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-top: 10px;
+  }
+
+  .info h4 {
+    font-size: 14px;
+  }
+
+  button {
+    width: 90%;
+    font-size: 14px;
+    margin: 14px auto;
+    display: block;
+  }
+
+  #closeModal {
+    font-size: 24px;
+    top: 10px;
+    right: 15px;
+  }
+
+  main {
+    padding-bottom: 80px; /* Adiciona espaço extra abaixo */
+  }
+}
   </style>
 </head>
 
 <body>
   <header>
-    <img src="foto.jpg" alt="Foto de Maria Isabel">
+    <img src="foto.jpg" alt="Foto de Maria Isabel" id="fotoPerfil" />
   </header>
+
+  <!-- Decoração -->
+  <div class="decoracao decoracao-top-left">🎀</div>
+  <div class="decoracao decoracao-top-right">🍰</div>
+  <div class="decoracao decoracao-center-left">🧁</div>
+  <div class="decoracao decoracao-center-right">🎂</div>
+  <div class="decoracao decoracao-bottom-left">🍓</div>
+  <div class="decoracao decoracao-bottom-right">🎉</div>
 
   <main>
     <h1>Maria Isabel Prado</h1>
@@ -126,17 +215,41 @@
       <h4>Arapongas - PR</h4>
       <h4>Deus é bom o tempo todo ✨</h4>
     </div>
-    <button onclick="abrirContato()">Entrar em Contato</button>
-    <button onclick="abrirRede()">Redes Sociais</button>
+
+    <button onclick="abrirLink('https://wa.me/554384246422')">Entrar em Contato</button>
+    <button onclick="abrirLink('https://www.instagram.com/maria_isabelprado')">Redes Sociais</button>
   </main>
 
+  <div id="imgModal">
+    <span id="closeModal" onclick="fecharModal()">x</span>
+    <img id="imgModalContent" src="foto.jpg" alt="Foto de Maria Isabel">
+  </div>
+  
+  <footer>
+  <div>
+    <p>"Feito com carinho, decorado com amor e abençoado por Deus." ✨</p>
+    <small class="creditos">Desenvolvido por <strong onclick="abrirLink('https://Wa.me/5543996350864')">@HubertPradoRamos💻</strong></small>
+  </div>
+</footer>
+
   <script>
-    function abrirContato() {
-      window.location.href = "https://wa.me/554384246422";
+    const modal = document.getElementById("imgModal");
+    const foto = document.getElementById("fotoPerfil");
+
+    foto.addEventListener("click", () => {
+      modal.style.display = "block";
+    });
+
+    function fecharModal() {
+      modal.style.display = "none";
     }
 
-    function abrirRede() {
-      window.location.href = "https://www.instagram.com/maria_isabelprado";
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) fecharModal();
+    });
+
+    function abrirLink(url) {
+      window.open(url, "_blank");
     }
   </script>
 </body>
